@@ -1,5 +1,6 @@
 package com.azoop.scout.application;
 
+import com.azoop.scout.helper.Constants;
 import com.azoop.scout.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,12 +16,15 @@ import java.util.List;
 @RequestMapping("/users")
 @SuppressWarnings("All")
 public class ScoutController {
+
     @Autowired
     @Qualifier("userService")
     private com.azoop.scout.services.UserService userService;
 
     @GetMapping("/getAll")
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()
+    {
+        System.out.println(Constants.userName);
         return this.userService.getUserList();
     }
 

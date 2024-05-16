@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/public")
 public class HomeController {
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('NORMAL')")
     @GetMapping("/home")
     public String home() {
         return "<!DOCTYPE html>\n" +
