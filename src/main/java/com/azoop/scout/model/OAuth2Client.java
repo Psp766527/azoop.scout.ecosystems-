@@ -10,49 +10,48 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
-@Data
 @Entity
-@Table(name = "User")
-@Builder
-@DynamicUpdate
+@Table(name = "OAuth2Client")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+@Builder
+@DynamicUpdate
+public class OAuth2Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
 
     @Column(nullable = false, unique = true)
-    private String userName;
-
-    @Column(nullable = false, unique = true)
-    private String email;
+    private String clientId;
 
     @Column(nullable = false)
-    private String password;
+    private String clientSecret;
 
-    private boolean enabled;
-    private boolean accountNonExpired;
-    private boolean credentialsNonExpired;
-    private boolean accountNonLocked;
+    @Column(nullable = false)
+    private String clientName;
+
+    @Column(nullable = false)
+    private String clientAuthenticationMethods;
+
+    @Column(nullable = false)
+    private String authorizationGrantTypes;
+
+    private String redirectUris;
+
+    @Column(nullable = false)
+    private String scopes;
+
+    private String clientSettings;
+    private String tokenSettings;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles = new HashSet<>();
 
 }
